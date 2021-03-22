@@ -6,23 +6,27 @@ import * as Yup from 'yup'
 import { string } from 'yup/lib/locale';
 import { CampoInput, CampoSenha } from '../../componentes/input';
 import { Button } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/core';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export interface CadastroScreenProps {
 }
 
 export function CadastroScreen(props: CadastroScreenProps) {
+    
+    const navegacao = useNavigation()
 
     const cadastrar = async (dados: any) => {
         await new Promise(r => setTimeout(() => r(''), 3000))
-        console.log('Cadastrado com sucesso!')
-        console.log(dados)
+        navegacao.navigate('carrinho')
     }
 
     const [habilitado, setHabilitado] = React.useState(false)
     const alternar = () => {
         setHabilitado(!habilitado)
     }
+
 
     return (
         <ImageBackground source={require('./../../assets/imagens/papel-de-fundo.jpg')} style={estilo.fundo} >
@@ -100,7 +104,9 @@ export function CadastroScreen(props: CadastroScreenProps) {
                             {isSubmitting && <ActivityIndicator color='#FFF' size={30} style={{margin: 5}} />}
                             {!isSubmitting && <Button title='Cadastrar' onPress={() => handleSubmit()} buttonStyle={estilo.botao} />}
                             
-                            <Text style={estilo.linkNavegacao}>Já possui conta?</Text>
+                            <TouchableOpacity onPress={() => navegacao.navigate('login')}>
+                                <Text style={estilo.linkNavegacao}>Já possui conta?</Text>
+                            </TouchableOpacity>
                         </View>
                     )}
 

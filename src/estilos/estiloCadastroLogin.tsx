@@ -29,10 +29,11 @@ export const estilo = StyleSheet.create({
     linkNavegacao: {
         color: '#a4ebf3',
         textAlign: 'center',
-        marginTop: 8,
+        marginTop: 4,
         fontSize: 15,
         fontStyle: 'italic',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        padding: 4
     },
     mensagemValidacao: {
         color: '#d9adad',
@@ -51,5 +52,12 @@ export const estilo = StyleSheet.create({
     textoCheck: {
         color: '#FFF',
         fontSize: 15,
+    },
+    mensagemErroLogin: {
+        color: '#d9adad',
+        textAlign: 'center',
+        marginTop: 15,
+        marginBottom: 5,
+        fontSize: 15
     }
 });
