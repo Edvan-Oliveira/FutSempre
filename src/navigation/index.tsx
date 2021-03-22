@@ -9,7 +9,7 @@ const Stack = createStackNavigator()
 
 export const NavegacaoPrincipal = () => (
     <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='carrinho' >
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='login'>
             <Stack.Screen name='cadastro' component={CadastroScreen} />
             <Stack.Screen name='login' component={LoginScreen} />
             <Stack.Screen name='carrinho' component={CarrinhoScreen} />
