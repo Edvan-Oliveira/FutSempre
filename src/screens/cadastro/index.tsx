@@ -3,7 +3,6 @@ import { View, Text, ImageBackground, StatusBar, Image, Switch, ActivityIndicato
 import { estilo } from '../../estilos/estiloCadastroLogin';
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { string } from 'yup/lib/locale';
 import { CampoInput, CampoSenha } from '../../componentes/input';
 import { Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/core';
@@ -19,7 +18,7 @@ export function CadastroScreen(props: CadastroScreenProps) {
 
     const cadastrar = async (dados: any) => {
         await new Promise(r => setTimeout(() => r(''), 3000))
-        navegacao.navigate('carrinho')
+        navegacao.navigate('app')
     }
 
     const [habilitado, setHabilitado] = React.useState(false)

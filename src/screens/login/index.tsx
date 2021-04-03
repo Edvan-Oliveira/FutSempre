@@ -22,7 +22,7 @@ export default function LoginScreen(props: LoginScreenProps) {
 
         if (email.trim() == 'edvan@email.com' && senha == 'senha123') {
             setErroLogin('')
-            navegacao.navigate('carrinho')
+            navegacao.navigate('app')
         } else {
             setErroLogin('Email ou senha incorreta')
         }

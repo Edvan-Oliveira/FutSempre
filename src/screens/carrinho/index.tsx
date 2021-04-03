@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements';
+import {  AntDesign } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface CarrinhoScreenProps {
 }
@@ -11,17 +13,12 @@ export function CarrinhoScreen(props: CarrinhoScreenProps) {
             <StatusBar />
 
             <View style={estilo.conteiner}>
-                <View style={estilo.cabecalho}>
-                    <Image source={require('./../../assets/imagens/carrinho.png')} style={estilo.carrinho} />
-                    <Text style={estilo.textoCarrinho}>Meu Carrinho</Text>
-                </View>
-
                 <View style={estilo.produto}>
 
                     <View style={estilo.imagemPreco}>
                         <Image style={estilo.imagemProduto}
-                            source={require('./../../assets/imagens/camisas/camisa-sao-paulo.jpg')} />
-                        <Text style={estilo.textoProduto}>R$ 20,50</Text>
+                            source={require('./../../assets/imagens/camisas/camisa-sao-paulo1.jpg')} />
+                        <Text style={estilo.textoPreco}>R$ 20,50</Text>
                     </View>
                     <View style={estilo.detalhesProduto}>
                         <Text style={estilo.tituloProduto}>Camisa do São Paulo 2021</Text>
@@ -33,22 +30,29 @@ export function CarrinhoScreen(props: CarrinhoScreenProps) {
                         </View>
 
                         <View style={estilo.conteinerQuantidade}>
-                            <Text style={estilo.textoProduto} >QUANTIDADE:</Text>
+                            <Text style={estilo.textoQuantidade} >QUANTIDADE:</Text>
                             <View style={estilo.quantidadeProduto}>
-                                <Button icon={{ name: 'minuscircleo', type: 'antdesign', color: '#fff' }} buttonStyle={estilo.botaoQuantidade} />
-                                <Text style={estilo.textoProduto}>5</Text>
-                                <Button icon={{ name: 'pluscircleo', type: 'antdesign', color: '#fff' }} buttonStyle={estilo.botaoQuantidade} />
+                                <TouchableOpacity>
+                                    <AntDesign name='minuscircle' size={20} color='#fff' />
+                                </TouchableOpacity> 
+                                
+                                <Text style={estilo.numeroQuantidade}>5</Text>
+
+                                <TouchableOpacity>
+                                    <AntDesign name='pluscircle' size={20} color='#fff' />
+                                </TouchableOpacity> 
                             </View>
                         </View>
 
                     </View>
                 </View>
+     
                 <View style={estilo.produto}>
 
                     <View style={estilo.imagemPreco}>
                         <Image style={estilo.imagemProduto}
-                            source={require('./../../assets/imagens/camisas/camisa-sao-paulo.jpg')} />
-                        <Text style={estilo.textoProduto}>R$ 20,50</Text>
+                            source={require('./../../assets/imagens/camisas/camisa-sao-paulo1.jpg')} />
+                        <Text style={estilo.textoPreco}>R$ 20,50</Text>
                     </View>
                     <View style={estilo.detalhesProduto}>
                         <Text style={estilo.tituloProduto}>Camisa do São Paulo 2021</Text>
@@ -60,17 +64,23 @@ export function CarrinhoScreen(props: CarrinhoScreenProps) {
                         </View>
 
                         <View style={estilo.conteinerQuantidade}>
-                            <Text style={estilo.textoProduto} >QUANTIDADE:</Text>
+                            <Text style={estilo.textoQuantidade} >QUANTIDADE:</Text>
                             <View style={estilo.quantidadeProduto}>
-                                <Button icon={{ name: 'minuscircleo', type: 'antdesign', color: '#fff' }} buttonStyle={estilo.botaoQuantidade} />
-                                <Text style={estilo.textoProduto}>5</Text>
-                                <Button icon={{ name: 'pluscircleo', type: 'antdesign', color: '#fff' }} buttonStyle={estilo.botaoQuantidade} />
+                                <TouchableOpacity>
+                                    <AntDesign name='minuscircle' size={20} color='#fff' />
+                                </TouchableOpacity> 
+                                
+                                <Text style={estilo.numeroQuantidade}>5</Text>
+
+                                <TouchableOpacity>
+                                    <AntDesign name='pluscircle' size={20} color='#fff' />
+                                </TouchableOpacity> 
                             </View>
                         </View>
 
                     </View>
                 </View>
-
+     
                 <View style={estilo.finalizarCompra}>
                     <Text style={estilo.textoValorTotal}>Total: R$ 41,00</Text>
                     <Button title='Finalizar Compra' buttonStyle={estilo.botaoComprar} titleStyle={{fontSize: 18}} />
@@ -92,25 +102,15 @@ const estilo = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
-    cabecalho: {
-        height: 75,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(58,99,81,1)',
-        width: '100%'
-    },
     carrinho: {
-        height: 40,
-        width: 40,
-        marginRight: 10
+        height: 28,
+        width: 28,
+        marginRight: 15
     },
     textoCarrinho: {
-        color: '#FFF',
-        fontSize: 25,
-        fontWeight: 'bold',
-        fontStyle: 'italic'
+        color: '#f7f7e8',
+        fontSize: 20,
+        fontWeight: '500'
     },
     resumoDescricao: {
         color: '#fff'
@@ -120,26 +120,32 @@ const estilo = StyleSheet.create({
     },
     produto: {
         backgroundColor: 'rgba(58,99,81,0.6)',
-        height: 190,
-        width: '90%',
+        height: 170,
+        width: '94%',
         borderRadius: 20,
-        borderTopRightRadius: 0,
-        marginTop: 50,
+        marginTop: 20,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         paddingTop: 10,
-        position: 'relative'
+        borderColor: '#1e6f5c',
+        borderWidth: 1.5
+    },
+    tituloProduto: {
+        color: '#fff',
+        fontSize: 15,
+        fontWeight: 'bold',
+        marginTop: 15
     },
     botaoRemover: {
         position: 'absolute',
         top: -6,
         right: -11
     },
-    textoProduto: {
+    textoPreco: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: 'bold'
     },
     imagemPreco: {
@@ -149,7 +155,7 @@ const estilo = StyleSheet.create({
         alignItems: 'center'
     },
     imagemProduto: {
-        height: 110,
+        height: 100,
         width: 90,
         borderRadius: 10,
         marginBottom: 10
@@ -164,22 +170,27 @@ const estilo = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        marginRight: 12
+    },
+    textoQuantidade: {
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: 'bold'
+    },
+    numeroQuantidade: {
+        color: '#fff',
+        paddingRight: 6,
+        paddingLeft: 6,
+        paddingTop: 3,
+        paddingBottom: 5,
+        fontSize: 17,
+        fontWeight: 'bold'
     },
     conteinerQuantidade: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
         paddingBottom: 5
-    },
-    tituloProduto: {
-        color: '#fff',
-        fontSize: 15,
-        fontWeight: 'bold',
-        marginTop: 20
-    },
-    botaoQuantidade: {
-        width: 50,
-        backgroundColor: 'rgba(0,0,0,0)'
     },
     finalizarCompra: {
         display: 'flex',
@@ -192,8 +203,8 @@ const estilo = StyleSheet.create({
         backgroundColor: '#dfdfdf',
         paddingRight: 20,
         paddingLeft: 20,
-        paddingBottom: 10,
-        paddingTop: 10
+        paddingBottom: 11,
+        paddingTop: 11
     },
     textoValorTotal: {
         color: '#222831',
@@ -203,6 +214,6 @@ const estilo = StyleSheet.create({
     botaoComprar: {
         borderRadius: 20,
         backgroundColor: '#af2d2d',
-        padding: 20
+        padding: 15
     }
 });
