@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { ModeloCartao } from '../modelos/cartao';
 
 export interface CartaoProps {
-    cartao: ModeloCartao
+    cartao: ModeloCartao,
+    estiloProduto?: any
 }
 
 export function Cartao(props: CartaoProps) {
     return (
-        <View style={estilo.produto}>
+        <View style={[estilo.produto, props.estiloProduto]}>
             <Image
                 style={estilo.imagemCamisa}
                 source={props.cartao.imagem}
@@ -47,7 +48,7 @@ const estilo = StyleSheet.create({
         flexDirection: 'column'
     },
     titulo: {
-        color: '#ccc',
+        color: '#dde',
         marginRight: 5,
         marginLeft: 5,
         fontSize: 13,

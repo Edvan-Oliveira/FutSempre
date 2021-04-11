@@ -21,7 +21,7 @@ export function Categoria(props: CategoriaProps) {
 
 const estilo = StyleSheet.create({
   opcao: {
-    backgroundColor: '#f7f3e9',
+    backgroundColor: '#fff',
     padding: 15,
     display: 'flex',
     flexDirection: 'row',

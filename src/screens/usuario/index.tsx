@@ -13,6 +13,7 @@ export function UsuarioScreen (props: UsuarioScreenProps) {
     return (
       <View style={estilo.conteiner}>
         <StatusBar />
+        
         <Text style={estilo.titulo}>Bem vindo!</Text>
         <Text style={estilo.texto}>Abaixo você pode criar uma conta ou se cadastrar caso não tenha uma.</Text>
         

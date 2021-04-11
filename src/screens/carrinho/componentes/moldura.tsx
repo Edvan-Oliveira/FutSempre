@@ -50,7 +50,7 @@ export function Moldura (props: MolduraProps) {
 
 const estilo = StyleSheet.create({
     resumoDescricao: {
-        color: '#ddd'
+        color: 'rgba(255, 255, 255, 0.92)'
     },
     conteinerResumoDescricao: {
         width: 200
@@ -109,7 +109,7 @@ const estilo = StyleSheet.create({
         marginLeft: 10
     },
     textoQuantidade: {
-        color: '#ddd',
+        color: '#fff',
         fontSize: 13,
         fontWeight: 'bold',
         marginRight: 3

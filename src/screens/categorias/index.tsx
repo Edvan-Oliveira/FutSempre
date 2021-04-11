@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { StatusBar, StyleSheet, ScrollView } from 'react-native';
-import { Categoria } from './componentes/categoria';
 import { useNavigation } from '@react-navigation/core';
+import * as React from 'react';
+import { ScrollView, StatusBar, StyleSheet } from 'react-native';
+import { Categoria } from './componentes/categoria';
 
 export interface CategoriasScreeenProps {
 }

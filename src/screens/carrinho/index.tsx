@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements';
-import { AntDesign } from '@expo/vector-icons'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Moldura } from './componentes/moldura';
 
 export interface CarrinhoScreenProps {
@@ -13,10 +11,31 @@ export function CarrinhoScreen(props: CarrinhoScreenProps) {
     return (
         <View style={estilo.fundo}>
             <StatusBar />
-
+            
             <ScrollView>
                 <View style={estilo.conteiner}>
 
+                <Moldura 
+                    modeloCarrinho={{
+                        id: '1',
+                        imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+                        titulo: 'Camisa do São Paulo 2021',
+                        resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+                        quantidade: 2,
+                        preco: 305.99
+                    }}
+                />
+                
+                <Moldura 
+                    modeloCarrinho={{
+                        id: '1',
+                        imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+                        titulo: 'Camisa do São Paulo 2021',
+                        resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+                        quantidade: 2,
+                        preco: 305.99
+                    }}
+                />
                 <Moldura 
                     modeloCarrinho={{
                         id: '1',

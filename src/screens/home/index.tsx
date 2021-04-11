@@ -1,21 +1,68 @@
 import * as React from 'react';
-import { View, Text, StatusBar, StyleSheet, Image } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, Image, ImageBackground } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Cartao } from '../../componentes/cartao';
+import { Secao } from '../../componentes/secao';
 
 export interface HomeScreenProps {
 }
 
 export function HomeScreen(props: HomeScreenProps) {
+  const cartoes = [
+    {
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88,
+      id: '1'
+    },
+    {
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88,
+      id: '2'
+    },
+    {
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88,
+      id: '3'
+    },
+    {
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88,
+      id: '4'
+    },
+  ]
+  
   return (
     <View style={estilo.fundo}>
       <StatusBar />
 
       <View style={estilo.conteiner}>
-        <Text style={estilo.textoRolagem}>Lançamentos</Text>
-        <ScrollView style={estilo.conteinerRolagem} horizontal>
-          <Image 
-            style={estilo.imagemCamisa}
-            source={require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg')} 
+        <ScrollView>
+          <View style={estilo.cabecalho}>
+            <ImageBackground
+              source={require('./../../assets/imagens/FUTSEMPRE.png')}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </View>
+
+          <Secao
+            key='1'
+            secao={{
+              titulo: 'Lançamentos',
+              cartoes: cartoes,
+              id: '1'
+            }}
+          />
+          <Secao
+            key='2'
+            secao={{
+              titulo: 'Mais vendidas',
+              cartoes: cartoes,
+              id: '1'
+            }}
           />
         </ScrollView>
       </View>
@@ -30,26 +77,13 @@ const estilo = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  conteiner: {
-    height: 200,
-    marginTop: 20,
+  cabecalho: {
     width: '100%',
-    paddingLeft: 20
+    height: 65,
+    backgroundColor: '#517867',
+    marginBottom: 20
   },
-  textoRolagem: {
-    fontSize: 20,
-    borderBottomColor: '#000',
-    borderBottomWidth: 1,
-    color: '#fff',
-    paddingBottom: 5
-  },
-  conteinerRolagem: {
-    marginTop: 10
-  },
-  imagemCamisa: {
-    height: 150,
-    width: 130,
-    borderRadius: 10,
-    marginTop: 10
+  conteiner: {
+    width: '100%'
   }
 });
