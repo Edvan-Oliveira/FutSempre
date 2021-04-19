@@ -48,22 +48,9 @@ export function HomeScreen(props: HomeScreenProps) {
             />
           </View>
 
-          <Secao
-            key='1'
-            secao={{
-              titulo: 'Lançamentos',
-              cartoes: cartoes,
-              id: '1'
-            }}
-          />
-          <Secao
-            key='2'
-            secao={{
-              titulo: 'Mais vendidas',
-              cartoes: cartoes,
-              id: '1'
-            }}
-          />
+          <Secao key='1' secao={{titulo: 'Lançamentos', cartoes: cartoes, id: '1'}} />
+          <Secao key='2' secao={{titulo: 'Mais vendidas', cartoes: cartoes, id: '1'}} />
+          
         </ScrollView>
       </View>
     </View>
