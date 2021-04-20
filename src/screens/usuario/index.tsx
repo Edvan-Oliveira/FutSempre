@@ -5,25 +5,38 @@ import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'reac
 import { Button } from 'react-native-elements';
 import { CampoUsuario } from './componentes';
 import * as ImagePicker from 'expo-image-picker'
+import { ModeloUsuario } from '../../modelos/usuario';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 export interface UsuarioScreenProps {
 }
 
 export function UsuarioScreen(props: UsuarioScreenProps) {
 
-  const usuario = {
-    nome: 'Edvan Oliveira',
-    cpf: '11111111111',
-    email: 'teste@teste.com',
-    telefone: '8299964578',
-    senha: '123456'
-  }
+
 
   let logado: boolean = true
   const navegacao = useNavigation()
   const [foto, setFoto] = React.useState<string>('')
   const [fotoEnviada, setFotoEnviada] = React.useState<boolean>(false)
+  const [desabilitado, setdesabilitado] = React.useState<boolean>(true)
 
+  let usuario: ModeloUsuario = {
+    id: '1',
+    nome: 'Edvan Oliveira',
+    cpf: '11111111111',
+    email: 'teste@teste.com',
+    telefone: '8299964578',
+    senha: '12345678',
+    foto: foto
+  }
+
+  function salvarUsuario(dados: ModeloUsuario) {
+    console.log(dados)
+    usuario = dados
+    setdesabilitado(true)
+  }
 
   const adicionarFoto = async () => {
     const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -57,33 +70,66 @@ export function UsuarioScreen(props: UsuarioScreenProps) {
         </View>
       </View>}
 
-      { logado && <View style={estilo.conteinerLogado}>
+      {logado && <Formik
+        initialValues={{ ...usuario }}
+        validationSchema={Yup.object().shape({
+          nome: Yup.string().required('(Nome obrigatório)').min(5, '(Nome completo)').max(20, 'Máximo 20 caracteres'),
+          telefone: Yup.string().required('(Telefone obrigatório)').min(5, '(Mínimo 5 caracteres)').max(20, '(Máximo 20 caracteres)'),
+          senha: Yup.string().required('(Senha obrigatória)').min(8, '(Mínimo 8 caracteres)').max(15, '(Máximo 15 caracteres)')
+        })}
+        onSubmit={salvarUsuario}
+      >
+        {({ handleChange, handleSubmit, values, errors, resetForm }) => (
+          <View style={estilo.conteinerLogado}>
 
-        <TouchableOpacity onPress={adicionarFoto}>
-          {!fotoEnviada && <Image source={require('./../../assets/imagens/foto-usuario.png')} style={estilo.foto} />}
-          {fotoEnviada && <Image source={{ uri: foto }} style={estilo.foto} />}
-        </TouchableOpacity>
+            <TouchableOpacity onPress={adicionarFoto}>
+              {!fotoEnviada && <Image source={require('./../../assets/imagens/foto-usuario.png')} style={estilo.foto} />}
+              {fotoEnviada && <Image source={{ uri: usuario.foto }} style={estilo.foto} />}
+            </TouchableOpacity>
 
-        <CampoUsuario valor={usuario.nome} desabilitado />
-        <CampoUsuario valor={usuario.cpf} desabilitado />
-        <CampoUsuario valor={usuario.email} desabilitado />
-        <CampoUsuario valor={usuario.telefone} desabilitado />
-        <CampoUsuario valor={usuario.senha} senha desabilitado />
+            {errors.nome && <Text style={estilo.mensagemValidacao}>{errors.nome}</Text>}
+            <CampoUsuario valor={values.nome} desabilitado={desabilitado} onChangeText={handleChange('nome')} />
 
-        <View style={estilo.salvarEditar}>
-          <Button
-            buttonStyle={[estilo.botaoSalvar, {backgroundColor: '#45526c'}]} title='Editar'
-            icon={<AntDesign name='edit' color='#eee' size={17} />}
-            titleStyle={estilo.tituloBotao} onPress={() => console.log('editar')}
-          />
-          <Button
-            buttonStyle={[estilo.botaoSalvar, {backgroundColor: '#aa2b1d'}]} title='Salvar'
-            icon={<AntDesign name='save' color='#eee' size={17} />}
-            titleStyle={estilo.tituloBotao} onPress={() => console.log('salvar')}
-          />
-        </View>
+            <CampoUsuario valor={values.cpf} desabilitado={true} />
+            <CampoUsuario valor={values.email} desabilitado={true} />
 
-      </View>}
+            {errors.telefone && <Text style={estilo.mensagemValidacao}>{errors.telefone}</Text>}
+            <CampoUsuario valor={values.telefone} desabilitado={desabilitado} onChangeText={handleChange('telefone')} />
+
+            {errors.senha && <Text style={estilo.mensagemValidacao}>{errors.senha}</Text>}
+            <CampoUsuario valor={values.senha} senha desabilitado={desabilitado} onChangeText={handleChange('senha')} />
+
+            <View style={estilo.salvarEditar}>
+              {desabilitado && <Button
+                buttonStyle={[estilo.botaoSalvar, { backgroundColor: '#45526c' }]}
+                title='Editar' icon={<AntDesign name='edit'
+                  color='#eee' size={17} />} titleStyle={estilo.tituloBotao}
+                onPress={() => setdesabilitado(false)}
+              />}
+
+              {!desabilitado && <Button
+                buttonStyle={[estilo.botaoSalvar, { backgroundColor: '#45526c' }]}
+                title='Cancelar' icon={<AntDesign name='close' color='#eee' size={17} />}
+                titleStyle={estilo.tituloBotao} onPress={() => {
+                  if (errors.nome || errors.telefone || errors.senha) resetForm()
+                  else values = { ...usuario }
+                  setdesabilitado(true)
+                }}
+              />}
+
+              <Button
+                buttonStyle={[estilo.botaoSalvar, { backgroundColor: '#aa2b1d' }]} title='Salvar'
+                icon={<AntDesign name='save' color={errors.nome || errors.telefone || errors.senha ? '#000' : '#eee'} size={17} />}
+                titleStyle={estilo.tituloBotao}
+                onPress={() => handleSubmit()}
+                disabled={errors.nome || errors.telefone || errors.senha || desabilitado ? true : false}
+              />
+            </View>
+
+          </View>
+        )}
+
+      </Formik>}
     </View>
   );
 }
@@ -133,13 +179,9 @@ const estilo = StyleSheet.create({
     height: 120,
     width: 120,
     marginBottom: 30,
-    borderRadius: 70
-  },
-  inputConteinerStyle: {
-    borderBottomWidth: 0,
-    backgroundColor: '#2f5d62',
-    borderRadius: 10,
-    height: '100%'
+    borderRadius: 70,
+    borderWidth: 5,
+    borderColor: '#519299'
   },
   campo: {
     display: 'flex',
@@ -183,5 +225,12 @@ const estilo = StyleSheet.create({
     marginLeft: 5,
     fontSize: 15,
     color: '#ddd'
+  },
+  mensagemValidacao: {
+    color: '#444',
+    marginBottom: 5,
+    fontSize: 15,
+    alignSelf: 'flex-end',
+    marginRight: 22
   }
 });

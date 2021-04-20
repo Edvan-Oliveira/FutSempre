@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 
 export interface CampoUsuarioProps {
-    valor: string
+    valor?: string
     onChangeText?(texto: string): void
     desabilitado?: boolean
     senha?: boolean
@@ -12,8 +12,6 @@ export interface CampoUsuarioProps {
 export function CampoUsuario(props: CampoUsuarioProps) {
     return (
         <View style={estilo.campo}>
-          
-
           <Input 
             inputContainerStyle={estilo.inputConteinerStyle} containerStyle={estilo.inputConteiner} 
             value={props.valor} inputStyle={estilo.input} secureTextEntry={props.senha}
@@ -26,7 +24,7 @@ export function CampoUsuario(props: CampoUsuarioProps) {
 const estilo = StyleSheet.create({
     inputConteinerStyle: {
       borderBottomWidth: 0,
-      backgroundColor: '#2f5d62',
+      backgroundColor: '#467378',
       borderRadius: 10,
       height: '100%'
     },
@@ -58,7 +56,7 @@ const estilo = StyleSheet.create({
     },
     inputConteiner: {
       width: '100%',
-      height: 50
+      height: 45
     },
     botaoSalvar: {
       borderRadius: 10,

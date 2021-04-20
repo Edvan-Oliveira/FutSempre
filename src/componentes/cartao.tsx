@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/core';
 import * as React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { ModeloCartao } from '../modelos/cartao';
 
 export interface CartaoProps {
@@ -8,18 +9,21 @@ export interface CartaoProps {
 }
 
 export function Cartao(props: CartaoProps) {
+    const navegacao = useNavigation()
     return (
-        <View style={[estilo.produto, props.estiloProduto]}>
-            <Image
-                style={estilo.imagemCamisa}
-                source={props.cartao.imagem}
-            />
+        <TouchableOpacity onPress={() => navegacao.navigate('detalhes')}>
+            <View style={[estilo.produto, props.estiloProduto]}>
+                <Image
+                    style={estilo.imagemCamisa}
+                    source={props.cartao.imagem}
+                />
 
-            <View style={estilo.conteinerTituloPreco}>
-                <Text style={estilo.titulo}>{props.cartao.titulo}</Text>
-                <Text style={estilo.preco}>R$ {props.cartao.preco}</Text>
+                <View style={estilo.conteinerTituloPreco}>
+                    <Text style={estilo.titulo}>{props.cartao.titulo}</Text>
+                    <Text style={estilo.preco}>R$ {props.cartao.preco}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -48,7 +52,7 @@ const estilo = StyleSheet.create({
         flexDirection: 'column'
     },
     titulo: {
-        color: '#dde',
+        color: '#eee',
         marginRight: 5,
         marginLeft: 5,
         fontSize: 13,
@@ -57,7 +61,7 @@ const estilo = StyleSheet.create({
     },
     preco: {
         fontWeight: 'bold',
-        color: '#eee',
+        color: '#fff',
         paddingTop: 8,
         marginRight: 10,
         marginLeft: 10,
