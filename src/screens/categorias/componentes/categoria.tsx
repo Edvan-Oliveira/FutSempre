@@ -2,17 +2,19 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Entypo } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ModeloCategoria } from '../../../modelos/categoria';
+import { useNavigation } from '@react-navigation/core';
 
 export interface CategoriaProps {
-  titulo: string
-  navegacao?(): void
+  categoria: ModeloCategoria
 }
 
 export function Categoria(props: CategoriaProps) {
+  const navegacao = useNavigation()
   return (
-    <TouchableOpacity onPress={props.navegacao}>
+    <TouchableOpacity onPress={() => navegacao.navigate('categoria', {titulo: props.categoria.titulo})}>
       <View style={estilo.opcao}>
-        <Text style={estilo.textoCategoria}>{props.titulo}</Text>
+        <Text style={estilo.textoCategoria}>{props.categoria.titulo}</Text>
         <Entypo name='chevron-right' size={20} />
       </View>
     </TouchableOpacity>

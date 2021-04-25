@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, StatusBar, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
+import { ModeloCarrinho } from '../../modelos/modeloCarrinho';
 import { Moldura } from './componentes/moldura';
 
 export interface CarrinhoScreenProps {
@@ -8,47 +9,62 @@ export interface CarrinhoScreenProps {
 
 export function CarrinhoScreen(props: CarrinhoScreenProps) {
 
+    const carrinho: ModeloCarrinho[] = [
+        {
+            id: '1',
+            imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+            titulo: 'Camisa do São Paulo 2021',
+            resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+            quantidade: 2,
+            preco: 305.99
+        },
+        {
+            id: '2',
+            imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+            titulo: 'Camisa do São Paulo 2021',
+            resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+            quantidade: 2,
+            preco: 305.99
+        },
+        {
+            id: '3',
+            imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+            titulo: 'Camisa do São Paulo 2021',
+            resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+            quantidade: 2,
+            preco: 305.99
+        },
+        {
+            id: '4',
+            imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+            titulo: 'Camisa do São Paulo 2021',
+            resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
+            quantidade: 2,
+            preco: 305.99
+        }
+    ]
+
     return (
         <View style={estilo.fundo}>
             <StatusBar />
-            
-            <ScrollView>
-                <View style={estilo.conteiner}>
 
-                <Moldura 
-                    modeloCarrinho={{
-                        id: '1',
-                        imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
-                        titulo: 'Camisa do São Paulo 2021',
-                        resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
-                        quantidade: 2,
-                        preco: 305.99
-                    }}
+            <View style={estilo.conteiner}>
+                <FlatList
+                    data={carrinho}
+                    renderItem={dados => (
+                        <Moldura
+                            modeloCarrinho={{
+                                id: dados.item.id,
+                                imagem: dados.item.imagem,
+                                titulo: dados.item.titulo,
+                                resumo: dados.item.resumo,
+                                quantidade: dados.item.quantidade,
+                                preco: dados.item.preco
+                            }}
+                        />
+                    )}
                 />
-                
-                <Moldura 
-                    modeloCarrinho={{
-                        id: '1',
-                        imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
-                        titulo: 'Camisa do São Paulo 2021',
-                        resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
-                        quantidade: 2,
-                        preco: 305.99
-                    }}
-                />
-                <Moldura 
-                    modeloCarrinho={{
-                        id: '1',
-                        imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
-                        titulo: 'Camisa do São Paulo 2021',
-                        resumo: 'De São Paulo tens o nome! Há 30 anos, Tele Santana...',
-                        quantidade: 2,
-                        preco: 305.99
-                    }}
-                />
-
-                </View>
-            </ScrollView>
+            </View>
 
             <View style={estilo.finalizarCompra}>
                 <Text style={estilo.textoValorTotal}>Total: R$ 41,00</Text>
@@ -68,7 +84,7 @@ const estilo = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'flex-end'
     },
     finalizarCompra: {
         display: 'flex',

@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import * as React from 'react';
-import { ScrollView, StatusBar, StyleSheet } from 'react-native';
+import { FlatList, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { ModeloCategoria } from '../../modelos/categoria';
 import { Categoria } from './componentes/categoria';
 
 export interface CategoriasScreeenProps {
@@ -9,16 +10,44 @@ export interface CategoriasScreeenProps {
 export function CategoriasScreeen(props: CategoriasScreeenProps) {
   const navegacao = useNavigation()
 
+  const categorias: ModeloCategoria[] = [
+    {
+      id: '1',
+      titulo: 'Camisas retrô'
+    },
+    {
+      id: '2',
+      titulo: 'Camisas masculinas'
+    },
+    {
+      id: '3',
+      titulo: 'Camisas femininas'
+    },
+    {
+      id: '4',
+      titulo: 'Times brasileiros'
+    },
+    {
+      id: '5',
+      titulo: 'Seleções'
+    },
+    {
+      id: '6',
+      titulo: 'Times europeus'
+    },
+  ]
+
   return (
-    <ScrollView style={estilo.fundo}>
+    <View style={estilo.fundo}>
       <StatusBar />
-      <Categoria titulo='Camisas retrô' navegacao={() => navegacao.navigate('categoria', {titulo: 'Camisas retrô'})} />
-      <Categoria titulo='Camisas masculinas' navegacao={() => navegacao.navigate('categoria', {titulo: 'Camisas masculinas'})} />
-      <Categoria titulo='Camisas femininas' navegacao={() => navegacao.navigate('categoria', {titulo: 'Camisas femininas'})} />
-      <Categoria titulo='Times brasileiros' navegacao={() => navegacao.navigate('categoria', {titulo: 'Times brasileiros'})} />
-      <Categoria titulo='Seleções' navegacao={() => navegacao.navigate('categoria', {titulo: 'Seleções'})} />
-      <Categoria titulo='Times europeus' navegacao={() => navegacao.navigate('categoria', {titulo: 'Times europeus'})} />
-    </ScrollView>
+
+      <FlatList 
+        data={categorias}
+        renderItem={dados => (
+          <Categoria key={dados.item.id} categoria={dados.item} />
+        )}
+      />
+    </View>
   );
 }
 

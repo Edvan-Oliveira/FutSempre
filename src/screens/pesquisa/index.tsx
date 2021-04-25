@@ -1,14 +1,54 @@
 import * as React from 'react';
-import { View, Text, StatusBar, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
 import { Input } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons'
 import { Cartao } from '../../componentes/cartao';
+import { ModeloCartao } from '../../modelos/cartao';
 
 export interface PesquisaScreenProps {
 
 }
 
 export function PesquisaScreen(props: PesquisaScreenProps) {
+
+  const resultados: ModeloCartao[] = [
+    {
+      id: '1',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+    {
+      id: '2',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+    {
+      id: '3',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+    {
+      id: '4',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+    {
+      id: '5',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+    {
+      id: '6',
+      imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
+      titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
+      preco: 299.88
+    },
+  ]
 
   return (
     <View style={estilo.fundo}>
@@ -20,27 +60,24 @@ export function PesquisaScreen(props: PesquisaScreenProps) {
         inputStyle={estilo.input}
         rightIcon={() => <FontAwesome name='search' size={20} color='black' />}
       />
-
-      <ScrollView>
-        <View style={estilo.conteinerProdutos}>
-
-          <Cartao 
-            cartao={{
-              imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
-              titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
-              preco: 299.88
-            }} 
-          />
-          <Cartao 
-            cartao={{
-              imagem: require('./../../assets/imagens/camisas/times-brasileiros/camisa-sao-paulo1.jpg'),
-              titulo: 'Camisa São Paulo I 21/22 s/n° Torcedor Adidas Masculina - Branco+Vermelho',
-              preco: 299.99
-            }} 
-          />
-
-        </View>
-      </ScrollView>
+      
+      <View style={estilo.conteinerProdutos}>
+        <FlatList 
+          numColumns={2}
+          data={resultados}
+          renderItem={dados => (
+            <Cartao
+              estiloProduto={{marginRight: 20}}
+              cartao={{
+                id: dados.item.id,
+                imagem: dados.item.imagem,
+                titulo: dados.item.titulo,
+                preco: dados.item.preco
+              }}
+            />
+          )}
+        />
+      </View>
 
     </View>
   );
@@ -70,7 +107,6 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: 20,
-    paddingRight: 20,
-    flexWrap: 'wrap'
+    paddingRight: 20
   }
 });
